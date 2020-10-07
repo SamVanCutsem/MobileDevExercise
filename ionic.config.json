@@ -1,0 +1,7 @@
+{
+  "name": "MobileDevExcersise",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
