@@ -5,5 +5,41 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item
+      *ngFor="let contact of contacts$ | async"
+      routerLink="/contact-list/contact-detail/{{contact.id}}"
+    >
+      <ion-avatar slot="start">
+        <img [src]="contact.picture" />
+      </ion-avatar>
+      <ion-label>
+        <ion-text>
+          <h2>{{ contact.firstName }} {{ contact.lastName}}</h2>
+          <p>{{ contact.phoneNumber }}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
+  <ion-infinite-scroll
+    *ngIf="(contacts$ | async) as contacts"
+    threshold="100px"
+    (ionInfinite)="loadData($event, contacts.length)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -1,3 +1,37 @@
-<ion-content>
-
+<ion-content *ngIf="(contact$ | async) as contact">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/contact-list"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon
+            slot="icon-only"
+            ios="pencil-outline"
+            md="pencil-sharp"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <div class="contact-detail-header">
+      <img [src]="contact.picture" />
+    </div>
+  </ion-header>
+  <div class="content">
+    <ion-list>
+      <ion-item>
+        <ion-text color="primary">
+          <h1>{{contact.firstName}} {{contact.lastName}}</h1>
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="call-outline"></ion-icon>
+        <p>{{contact.phoneNumber}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
